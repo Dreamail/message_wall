@@ -28,10 +28,10 @@ export default {
       list: list,
       load: () => {
         setTimeout(() => {
-          getMsg().then((res) => {
-            res.json().then(
-              (body: {
-                Documents: {
+          getMsg().then((resp) => {
+            resp.json().then(
+              (
+                json: {
                   id: string;
                   data: {
                     title: string;
@@ -39,15 +39,15 @@ export default {
                     description: string;
                     imagesrc: string[];
                   };
-                }[];
-              }) => {
-                body.Documents.forEach((element) => {
+                }[]
+              ) => {
+                json.forEach((element) => {
                   list.value.push(element.data);
                 });
 
                 loading.value = false;
 
-                if (body.Documents.length != 4) {
+                if (json.length != 4) {
                   finished.value = true;
                 }
               }
